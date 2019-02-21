@@ -1,0 +1,545 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>namebench: 2019-02-21 21:42:12.036877</title>
+  <style type="text/css">
+    
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: #bbb;
+  background-image: -moz-linear-gradient(0% 100% 90deg, #e5e5e5, #666, #e5e5e5 99%);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e5), to(#bbb), color-stop(.1,#666));
+}
+
+
+td {
+  font-size: x-small;
+}
+
+
+#container {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 985px;
+  background-color: #f5f5f5;
+  padding: 0.5em;
+  padding-top: 1px;
+  border: 2px solid #666;
+  border-radius: .6em;
+  -moz-border-radius: .6em;
+  -webkit-border-radius: .6em;
+}
+
+h1 {
+  color: #00CC33;
+  font-size: 75px;
+  text-shadow: 3px 3px #eee;
+  padding-top: 4px;
+  margin: 0;
+}
+
+h2 {
+  padding-top: 1em;
+  clear:  both;
+  font-size: 1em;
+}
+
+h3 {
+  font-size: 0.8em;
+  padding-top:  0;
+  margin: 0;
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+h5.faster {
+  font-size:  30px;
+  font-style: italic;
+  color: #009911;
+  margin: 0;
+  padding-top: 4px;
+}
+
+
+#nsdetails {
+  display: block;
+  background-color:  #C2CFF1;
+  border-radius: .5em;
+  -moz-border-radius: .5em;
+  -webkit-border-radius: .5em;
+  padding-left:  3px;
+  padding-bottom: 3px;
+  padding-right:  3px;
+  margin-left: 0.25em;
+}
+
+table#nstable {
+  width:  100%;
+  border-collapse:  collapse;
+  font-size: small;
+}
+
+#nstable tr {
+  vertical-align:  top;
+}
+
+#nstable td {
+  font-size: small;
+}
+
+#nstable td.name_cell {
+  font-size: x-small;
+}
+
+#nstable td.hostname_cell {
+  font-size: x-small;
+}
+
+
+.ip {
+  margin-left: 1em;
+  font-weight: bold;
+  font-family: monospace;
+  border: 1px solid #999;
+  background-color: #f5f5f5;
+  width: 10em;
+  padding: 1px;
+  color: #000;
+}
+
+ul.warnings {
+  padding:  0;
+  margin:  0;
+  margin-left: 0.em;
+  list-style-position:  inside;
+}
+.warnings li {
+}
+#nstable td {
+  padding:  2px;
+  border-right:  1px solid #C2CFF1;
+}
+
+.even {
+  background-color: #fff
+}
+.odd {
+  background-color: #ebeff9;
+}
+
+.unhealthy_host {
+    background-color: #FFD6D8;
+    border-bottom: 1px solid #990000;
+    border-top: 1px solid #990000;
+}
+
+.primary_row {
+  font-weight: bold;
+  background-color: #FFFFEE;
+  border-top: 1px solid #EEEE00;
+  border-bottom: 1px solid #EEEE00;
+}
+
+.disabled {
+  background-color:  #333;
+  border-bottom: 1px solid #666;
+  color: #fff;
+}
+
+.disabled A { 
+  color: #fff;
+}
+
+.disabled A:visited {
+  color: #e5e5e5;
+}
+
+.greybox {
+  border:  1px solid #999;
+  border-radius: .5em;
+  -moz-border-radius: .5em;
+  -webkit-border-radius: .5em;
+  padding:  1em;
+  height:  11em;
+  background-color:  #fff;
+}
+
+#big_summary {
+  display: inline-table;
+  float:  left;
+  text-align:  center;
+  width: 24em;
+}
+
+#recommended_config {
+  float: right;
+  display:  inline-table;
+}
+
+#recommended_config table {
+  margin-top: 1em;
+}
+
+#recommended_config td {
+  font-size: medium;
+}
+
+.rec_name {
+  margin-left:  8px;
+  display:  inline;
+  color:  #999;
+}
+
+.section {
+  margin-left: 0.25em;
+  padding: 1em;
+  background-color:  #fff;
+  max-width: 910px;
+}
+
+.config {
+  background-color:  #fff;
+}
+.configtable {
+  font-size: 10px;
+}
+
+.configtable tr {
+  border:  9px solid #f00;
+}
+
+#nstable thead td {
+  font-weight:  bold;
+  font-size: x-small;
+}
+
+h2:before {
+  color:  #555;
+  content:  '\25BA';
+  padding-right:  0.25em;
+}
+
+
+input[type=text] {
+  color: #000;
+}
+
+.normal .error_count {
+  background-color: #900;
+  color: #fff;
+}
+
+.version {
+  text-align: right;
+  font-size: x-small;
+  color: #ccc;
+  clear: both;
+}
+
+/* links with tooltips */
+a.info {
+    position:relative;
+    z-index:24;
+    color: #000;
+    text-decoration:none
+}
+.disabled a.info {
+    color: #fff;
+}
+
+a.info:hover {z-index:25; }
+a.info span {display: none}
+a.info:hover span {
+    display:block;
+    position:absolute;
+    top:2em; left:2em; width:15em;
+    border:1px solid #0cf;
+    background-color:#cff; color:#000;
+    text-align: center
+}
+
+#notice {
+  font-size: small;
+  text-align: center;
+  background-color: #ffa;
+  border: 1px solid #cc7;
+}
+  </style>
+</head>
+<body>
+
+<div id="container">
+
+<div class="version">namebench 1.3.1</div>
+
+
+<div id="big_summary" class="greybox">
+	<h4><strong>1.1.1.1</strong> is</h4>
+
+	<h1>906.5%</h1><h5 class="faster">Faster</h5>
+	<h4>than your current primary DNS server</h4>
+
+</div>
+
+<div id="recommended_config" class="greybox">
+	<h4>Recommended configuration (fastest + nearest)</h4>
+	<table>
+	
+	<tr>
+	  <td>Primary Server</td>
+    <td><div class="ip">1.1.1.1</div></td><td class="rec_name"></td>
+	</tr>
+
+	<tr>
+	  <td>Secondary Server</td>
+    <td><div class="ip">192.168.13.2</div></td><td class="rec_name">SYS-192.168.13.2</td>
+	</tr>
+
+	<tr>
+	  <td>Tertiary Server</td>
+    <td><div class="ip">8.8.8.8</div></td><td class="rec_name">SYS-8.8.8.8</td>
+	</tr>
+
+  </table>
+</div>
+
+
+<h2>Tested DNS Servers</h2>
+
+<div id="nsdetails">
+<table id="nstable">
+<thead>
+<tr>
+  <td nowrap="nowrap">IP</td>
+  <td>Descr.</td>
+  <td nowrap="nowrap">Hostname</td>
+  <td nowrap="nowrap">Avg (ms)</td>
+  <td nowrap="nowrap">Diff</td>
+	<td nowrap="nowrap">Min</td>
+	<td nowrap="nowrap">Max</td>
+  <td nowrap="nowrap">TO</td>
+  <td nowrap="nowrap">NX</td>
+  <td>Notes</td>
+</tr>
+</thead>
+
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=1.1.1.1" class="info">1.1.1.1</td>
+  <td class="name_cell">1.1.1.1</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=one.one.one.one" class="info">one.one.one.one<span>CDG </span></a></td>
+  <td>137.74</td>
+  <td>906.5%</td>
+  <td>60.8</td>
+  <td>1023.6</td>
+  <td >0</td>
+  <td>12</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.129, 104.244.42.1</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 172.217.19.238</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 216.58.215.36</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=8.8.8.8" class="info">8.8.8.8</td>
+  <td class="name_cell">SYS-8.8.8.8</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=google-public-dns-a.google.com" class="info">google-public-dns-a.google.com<span>37.48.65.144 5.79.68.108 </span></a></td>
+  <td>165.58</td>
+  <td>737.2%</td>
+  <td>64.4</td>
+  <td>1101.1</td>
+  <td >0</td>
+  <td>12</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>A backup DNS server for this system.</li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 216.58.208.228</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 216.58.213.142</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.1, 104.244.42.129</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd ">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=208.67.222.222" class="info">208.67.222.222</td>
+  <td class="name_cell">208.67.222.222</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=resolver1.opendns.com" class="info">resolver1.opendns.com<span>m25.lon m41.lon </span></a></td>
+  <td>174.85</td>
+  <td>692.8%</td>
+  <td>68.8</td>
+  <td>871.0</td>
+  <td >0</td>
+  <td>12</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 216.58.204.142</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 216.58.208.228</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.129, 104.244.42.193</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal even">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=9.9.9.9" class="info">9.9.9.9<span>Q9-U-5.1</span></td>
+  <td class="name_cell">9.9.9.9</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=dns.quad9.net" class="info">dns.quad9.net<span>res100.lhr.rrdns.pch.net res210.lhr.rrdns.pch.net </span></a></td>
+  <td>234.13</td>
+  <td>492.1%</td>
+  <td>69.2</td>
+  <td>3314.0</td>
+  <td >0</td>
+  <td>12</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 216.58.201.36</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 216.58.198.174</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.193, 104.244.42.129</a></li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+<tr class="normal odd  primary_row">
+
+  <td class="ip_cell"><a href="http://www.google.com/search?q=192.168.13.2" class="info">192.168.13.2</td>
+  <td class="name_cell">SYS-192.168.13.2</td>
+  <td class="hostname_cell"><a href="http://www.google.com/search?q=192.168.13.2" class="info">192.168.13.2</a></td>
+  <td>1386.26</td>
+  <td></td>
+  <td>3.4</td>
+  <td>3500.0</td>
+  <td >0</td>
+  <td>11</td>
+  <td class="notes_cell">
+  
+    <ul class="warnings">
+      
+      <li>The current preferred DNS server.</li>
+      
+      <li>16 queries to this host failed</li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">www.google.com is hijacked: 216.58.204.228</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">twitter.com appears incorrect: 104.244.42.129, 104.244.42.193</a></li>
+      
+      <li><a href="http://code.google.com/p/namebench/wiki/FAQ#What_does_"Incorrect_result_for..."_mean?">google.com appears incorrect: 216.58.213.142</a></li>
+      
+      <li>Timeout The DNS operation timed out. (40 requests)</li>
+      
+	</ul>
+  
+  </td>
+</tr>
+
+</table>
+</div>
+
+
+<h2>Graphs</h2>
+
+<div id="graphs" class="section">
+<h2>Mean Response Duration</h2>
+<img src="http://chart.apis.google.com/chart?chxt=y%2Cx%2Cx&chd=e%3AGWHoIDKy.0&chxp=0%7C2%2C623&chxr=1%2C0%2C1390%7C2%2C-69.5%2C1459.5&chxtc=1%2C-720&chco=0000ff&chbh=a&chs=720x117&cht=bhg&chxl=0%3A%7CSYS-192.168.13.2%7C9.9.9.9%7C208.67.222.222%7CSYS-8.8.8.8%7C1.1.1.1%7C1%3A%7C0%7C160%7C320%7C480%7C640%7C800%7C960%7C1120%7C1280%7C1390%7C2%3A%7CDuration%20in%20ms." alt="Mean Duration Graph" />
+
+<h3>Fastest Individual Response Duration</h3>
+<img src="http://chart.apis.google.com/chart?chxt=y%2Cx%2Cx&chd=e%3ADI3l61-6.Q&chxp=0%7C2%2C31&chxr=1%2C0%2C70%7C2%2C-3.5%2C73.5&chxtc=1%2C-720&chco=0000ff&chbh=a&chs=720x117&cht=bhg&chxl=0%3A%7C9.9.9.9%7C208.67.222.222%7CSYS-8.8.8.8%7C1.1.1.1%7CSYS-192.168.13.2%7C1%3A%7C0%7C5%7C10%7C15%7C20%7C25%7C30%7C35%7C40%7C45%7C50%7C55%7C60%7C65%7C70%7C2%3A%7CDuration%20in%20ms." alt="Fastest Response Graph" />
+
+<h3>Response Distribution Chart (First 200ms)</h3>
+
+<img src="http://chart.apis.google.com/chart?cht=lxy&chs=720x415&chxt=x,y&chg=10,20&chxr=0,0,200|1,0,100&chd=t:0,32,36,37,39,40,42,43,44,45,46,48,49,51,51,53,55,59,66,160|0,0,4,8,13,19,25,29,36,39,46,51,56,62,66,70,74,77,81,85|0,1,2,3,4,6,170|0,0,6,10,17,20,24|0,30,33,34,35,36,38,39,40,42,43,44,45,46,47,49,50,54,59,81,115|0,0,4,8,11,16,20,28,32,37,42,49,55,59,63,68,72,77,80,84,88|0,34,39,40,42,44,45,46,48,50,52,54,55,58,63,72,84,116|0,0,4,10,14,21,27,33,39,44,50,54,57,61,64,68,72,75|0,35,38,40,41,43,44,46,47,47,49,51,53,55,58,65,79,99,113|0,0,4,10,14,18,22,28,31,35,39,46,50,53,58,62,66,69,73&chco=ff9900,1a00ff,ff00e6,80ff00,00e6ff&chxt=x,y,x,y&chxl=2:||Duration+in+ms||3:||%25|&chdl=SYS-8.8.8.8|SYS-192.168.13.2|1.1.1.1|208.67.222.222|9.9.9.9" alt="Response Distribution Graph (first 200ms)" />
+
+<h3>Response Distribution Chart (Full)</h3>
+
+<img src="http://chart.apis.google.com/chart?cht=lxy&chs=720x415&chxt=x,y&chg=10,20&chxr=0,0,3500|1,0,100&chd=t:0,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,4,9,11,12,19,27,31|0,0,4,8,13,19,25,29,36,39,46,51,56,62,66,70,74,77,81,85,88,92,96,99,100|0,0,0,0,0,0,10,10,11,14,17,20,25,27,29,34,38,44,52,61,70,77,90,100|0,0,6,10,17,20,24,28,31,35,38,42,46,49,53,56,60,64,67,71,74,78,82,100|0,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,5,7,9,12,22,29|0,0,4,8,11,16,20,28,32,37,42,49,55,59,63,68,72,77,80,84,88,92,95,99,100|0,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,5,7,7,8,9,11,12,15,25|0,0,4,10,14,21,27,33,39,44,50,54,57,61,64,68,72,75,79,82,86,90,93,97,100|0,2,2,2,2,2,3,3,3,3,3,3,3,3,3,4,5,6,6,8,10,11,15,17,19,34,95|0,0,4,10,14,18,22,28,31,35,39,46,50,53,58,62,66,69,73,77,80,84,88,92,95,99,100&chco=ff9900,1a00ff,ff00e6,80ff00,00e6ff&chxt=x,y,x,y&chxl=2:||Duration+in+ms||3:||%25|&chdl=SYS-8.8.8.8|SYS-192.168.13.2|1.1.1.1|208.67.222.222|9.9.9.9" alt="Response Distribution Graph (full)" />
+</div>
+
+
+<h2>Query Details</h2>
+
+<div id="details" class="section">
+View the details in <a href="namebench_2019-02-21_2142.csv">Comma Separated Values (csv)</a> format.
+</div>
+
+
+
+<h2>Configuration</h2>
+
+
+<div id="config" class="section">
+<table id="configtable">
+	<thead><tr><td>Name</td><td>Value</td></tr></thead>
+	
+	  <tr><td>benchmark_thread_count</td><td>2</td></tr>
+	
+	  <tr><td>health_thread_count</td><td>40</td></tr>
+	
+	  <tr><td>health_timeout</td><td>3.75</td></tr>
+	
+	  <tr><td>hide_results</td><td>0</td></tr>
+	
+	  <tr><td>input_source</td><td>alexa</td></tr>
+	
+	  <tr><td>no_gui</td><td>True</td></tr>
+	
+	  <tr><td>num_servers</td><td>11</td></tr>
+	
+	  <tr><td>only</td><td>True</td></tr>
+	
+	  <tr><td>ping_timeout</td><td>0.5</td></tr>
+	
+	  <tr><td>query_count</td><td>250</td></tr>
+	
+	  <tr><td>run_count</td><td>1</td></tr>
+	
+	  <tr><td>select_mode</td><td>automatic</td></tr>
+	
+	  <tr><td>template</td><td>html</td></tr>
+	
+	  <tr><td>timeout</td><td>3.5</td></tr>
+	
+	  <tr><td>upload_results</td><td>0</td></tr>
+	
+	  <tr><td>version</td><td>1.3.1</td></tr>
+	
+</table>
+</div>
+
+</div>
+</body>
+</html>
